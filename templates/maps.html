@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% block content %}
+{#<div class="border-blue-400 border-4">#}
+    <div class="">
+        <form class="max-w-md mx-auto" action="{% url 'maps' %}">
+        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-black">Search</label>
+
+                <div class="relative mb-2">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-2 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        </svg>
+                    </div>
+                    <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-slate-500 border border-slate-300 rounded-full bg-slate-100 focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-600 dark:border-slate-600 placeholder-slate-500 dark:placeholder-slate-300 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" placeholder="Enter City, Country, Coordinates ...." required />
+                        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 dark:bg-slate-500 dark:hover:bg-slate-700 dark:focus:ring-slate-500 hover:transition-all dark:hover:transition-all">Search</button>
+                </div>
+        </form>
+
+        <div class="relative w-full h-96 ">
+            <iframe class="absolute top-0 left-0 w-full h-full px-20"
+        {#        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12080.73732861526!2d-74.0059418!3d40.7127847!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM40zMDA2JzEwLjAiTiA3NMKwMjUnMzcuNyJX!5e0!3m2!1sen!2sus!4v1648482801994!5m2!1sen!2sus"#}
+                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2035451.6336039484!2d-61.719881064285616!3d4.856981471164482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8dbc7dbb39e173a7%3A0xd1fed35ae7c9497d!2sPotaro-Siparuni!5e0!3m2!1sen!2s!4v1743479560171!5m2!1sen!2s"
+                    style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" loading="eager" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+{% endblock %}

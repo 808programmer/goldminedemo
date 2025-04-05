@@ -1,0 +1,115 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+    <title>Goldmine AI</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+        <!-- OR download tailwind.min cdn file and paste your file -->
+        <!-- <script src="./assets/tailwind/tailwind.min.js"></script> -->
+        <!-- Configure your strategy -->
+        <script>
+                tailwind.config = {
+                    darkMode: 'class', /* class/media, here we use class to enable manually dark mode */
+                }
+        </script>
+        <script>
+            /**
+             * Loads the theme stored
+            */
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                    document.documentElement.classList.remove('dark')
+            }
+        </script>
+    {% tailwind_css %}
+</head>
+
+{#<body class="transition-colors duration-300 ease-in-out flex flex-col h-screen justify-between bg-gradient-to-t from-zinc-400 to-zinc-200 dark:from-zinc-950 dark:to-zinc-800">#}
+<body class="animate-fade transition-colors duration-300 ease-in-out flex flex-col h-screen justify-between bg-zinc-300 dark:bg-zinc-900">
+<nav>
+  <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4 ">
+<!--Site logo and name-->
+  <a href="{% url 'home' %}" class="flex items-center space-x-2 rtl:space-x-reverse">
+        <img src="/static/images/goldmine_ai_black_fonts.png" class="invert dark:invert-0 h-12" alt="Goldmine AI Logo"/>
+      <span class="self-center text-2xm font-semibold whitespace-nowrap text-black dark:text-white">Goldmine AI</span>
+  </a>
+
+    {#Dark Mode/Light Mode Switch#}
+  <div class="flex items-center md:order-3 space-x-3 md:space-x-0 rtl:space-x-reverse hover:transition-all">
+      <button id="theme-toggle" type="button" class="hover:transition-all text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-slate-700 rounded-lg text-sm p-2.5">
+          <svg id="theme-toggle-dark-icon" class="w-4 h-4 hidden hover:transition-all hover:animate-pulse" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="w-4 h-4 hidden hover:transition-all hover:animate-pulse" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+      </button>
+  </div>
+
+    {# nav bar buttons #}
+  <div class="items-start justify-evenly hidden w-full md:flex md:w-32 md:order-1" id="navbar-user">
+    <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 md:space-x-20 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+      <li>
+        <a href="{% url 'maps' %}" class="block py-2 px-5 text-gray-900 rounded-none hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-all">Maps</a>
+      </li>
+      <li>
+        <a href="{% url 'about' %}" class="block py-2 px-5 text-gray-900 rounded-none hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-all">About</a>
+      </li>
+
+    </ul>
+  </div>
+  </div>
+</nav>
+
+<div>
+{% block content %}
+
+{#Search Bar on Homepage#}
+    <form class="max-w-md mx-auto">
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-black">Search</label>
+
+        {# This class represents the Welcome message on the Homepage. #}
+    <div id="typewriter" class="mx-auto flex items-center justify-center p-3 border-solid font-serif text-2xl text-black dark:text-slate-50">
+
+        </div>
+
+        <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            </svg>
+        </div>
+        <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-slate-500 border border-slate-300 rounded-full bg-slate-100 focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-600 dark:border-slate-600 placeholder-slate-500 dark:placeholder-slate-300 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" placeholder="Enter your command..." required />
+            <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 dark:bg-slate-500 dark:hover:bg-slate-700 dark:focus:ring-slate-500 hover:transition-all">Search</button>
+    </div>
+</form>
+
+{% endblock %}
+</div>
+
+<footer class="bg-transparent dark:bg-transparent sticky bottom-0">
+  <div class="mx-auto max-w-screen-2xl px-2 py-3 sm:px-6 lg:px-8">
+    <div class="flex justify-between">
+      <div class="text-sm text-gray-700 dark:text-gray-500 lg:mt-0 lg:text-right py-2">
+        &copy; 2025 Goldmine AI
+      </div>
+        <div class="text-sm text-gray-700 dark:text-gray-500 mx-auto">
+            By using Goldmine AI, you agree to our <a class="text-gray-700 dark:text-gray-400" href="/"><u><strong>Terms</strong></u></a> and have read our <a class="text-gray-700     dark:text-gray-400" href="/"><u><strong>Privacy Policy</strong></u></a>.
+      </div>
+        <div>
+            <button type="button" class="text-sm md:me-0 focus:ring-4 py-2 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-popup="user popup">
+        <span class="sr-only">Open user menu</span>
+        <img class="w-7 h-7 rounded-lg" src="/static/images/support_white.png" alt="user photo image">
+      </button>
+        </div>
+    </div>
+  </div>
+</footer>
+</body>
+<script src="{% static "js/app.js"%}" defer></script>
+<script src="{% static "js/typewriter.js"%}" defer></script>
+
+{% comment %} <script src="https://unpkg.com/@themesberg/flowbite@1.21.0/dist/flowbite.bundle.js"></script> {% endcomment %}
+</html>
